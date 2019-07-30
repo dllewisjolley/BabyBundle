@@ -1,0 +1,6 @@
+framework module Pods_BabyBundle {
+  umbrella header "Pods-BabyBundle-umbrella.h"
+
+  export *
+  module * { export * }
+}
