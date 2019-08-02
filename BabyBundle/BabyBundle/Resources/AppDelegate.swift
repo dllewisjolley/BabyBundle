@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
+    
 
     var window: UIWindow?
 
@@ -20,10 +22,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        ThemeHelper.setupAppeareance()
+        
+        let signIn = GIDSignIn.sharedInstance()
+        signIn?.clientID = "61324882782-6c53oscpgv5me5uqgnmbbsu7gn0i28l7.apps.googleusercontent.com"
+     
+        
+        if Auth.auth().currentUser != nil {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let babyTabBarController = storyboard.instantiateViewController(withIdentifier: "BabyTabBarController")
+            window?.rootViewController = babyTabBarController
+            window?.makeKeyAndVisible()
+        }
         
         
         
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

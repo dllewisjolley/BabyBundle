@@ -9,12 +9,21 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import AVFoundation
+import AVKit
 
 class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
+    
+    
+    @IBOutlet weak var videoView: UIView!
+    var player: AVPlayer?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       setupVideo()
+        setupSignInButton()
         
         let signIn = GIDSignIn.sharedInstance()
         
@@ -24,6 +33,12 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         
 
      
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+     //  setupVideo()
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -57,6 +72,35 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         print("User Disconnected")
     }
     
+    private func setupVideo() {
+        
+        let videoPath = Bundle.main.path(forResource: "Baby", ofType: ".mp4")
+        
+        player = AVPlayer(url: URL(fileURLWithPath: videoPath!))
+        player!.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
+        
+        let playerLayer = AVPlayerLayer(player: player)
+        
+        playerLayer.frame = self.view.frame
+        playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.view.layer.insertSublayer(playerLayer, at: 0)
+        
+        
+    NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player!.currentItem)
+        
+        player!.seek(to: CMTime.zero)
+        player!.play()
+        self.player?.isMuted = true
+        
+       
+        
+        }
+    
+    @objc private func playerItemDidReachEnd() {
+        player!.seek(to: CMTime.zero)
+        
+    }
+    
     
     
     private func setupSignInButton() {
@@ -74,15 +118,9 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
                             buttonWidthContraint])
         
     }
+    
+    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }

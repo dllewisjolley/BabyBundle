@@ -9,6 +9,9 @@ PODS:
     - FirebaseAnalytics (= 6.0.4)
   - Firebase/CoreOnly (6.5.0):
     - FirebaseCore (= 6.1.0)
+  - Firebase/Storage (6.5.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.4.0)
   - FirebaseAnalytics (6.0.4):
     - FirebaseCore (~> 6.1)
     - FirebaseInstanceID (~> 4.2)
@@ -32,6 +35,10 @@ PODS:
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
+  - FirebaseStorage (3.4.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseUI/Auth (8.0.4):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
@@ -83,7 +90,10 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Analytics
+  - Firebase/Auth
+  - Firebase/Storage
   - FirebaseUI/Google
+  - GoogleSignIn
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -93,6 +103,7 @@ SPEC REPOS:
     - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseInstanceID
+    - FirebaseStorage
     - FirebaseUI
     - GoogleAppMeasurement
     - GoogleSignIn
@@ -108,6 +119,7 @@ SPEC CHECKSUMS:
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: aecf02fb2274ec361b9bebeac112f5daa18273bd
   FirebaseInstanceID: 662b8108a09fe9ed01aafdedba100fde8536b0f6
+  FirebaseStorage: 618dd8fd886b30adf6e5d1915b1f5c18cb5c3944
   FirebaseUI: d92c980c1c7e553df3c5e7b0725baeb13f80f6d2
   GoogleAppMeasurement: 183bd916af7f80deb67c01888368f1108d641832
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
@@ -116,6 +128,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: d65ff212438b241afc493fe60d8ba12b717bcdda
+PODFILE CHECKSUM: b792f960a3c705548ba068d2f565203eb0849095
 
 COCOAPODS: 1.7.5

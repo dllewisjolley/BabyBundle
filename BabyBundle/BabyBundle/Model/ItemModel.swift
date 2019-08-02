@@ -9,8 +9,22 @@
 import Foundation
 
 
-struct Item: Decodable {
+struct Item: Equatable, Codable {
     
+
+    var name: String
+    var isAdded: Bool
+    var imageName: String
+    var price: String
+    
+    init(name: String, isAdded: Bool = false, imageName: String, price: String) {
+        
+        self.name = name
+        self.isAdded = isAdded
+        self.imageName = imageName
+        self.price = price
+        
+    }
     
     
 }

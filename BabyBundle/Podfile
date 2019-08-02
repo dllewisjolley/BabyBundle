@@ -8,6 +8,9 @@ target 'BabyBundle' do
   # Pods for BabyBundle
 
 pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
+pod 'GoogleSignIn'
 pod 'FirebaseUI/Google'
+pod 'Firebase/Storage'
 
 end
